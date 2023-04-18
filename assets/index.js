@@ -1,4 +1,4 @@
-'user strict';
+'use strict';
 // Перше завдання 
 const testArray = [1,2,3];
 testArray.push(6,5,4);
