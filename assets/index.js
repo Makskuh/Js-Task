@@ -41,6 +41,9 @@ function MyArrayProto() {
     }
     return undefined;
   };
+  this.isMyArray = function(object) {
+    return object instanceof MyArray;
+  }
 }
 MyArray.prototype = new MyArrayProto();
 
