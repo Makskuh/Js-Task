@@ -41,12 +41,35 @@ function MyArrayProto() {
     }
     return undefined;
   };
-  this.isMyArray = function(object) {
+  this.isMyArray = function (object) {
     return object instanceof MyArray;
-  }
+  };
+  this.forEach = function (callBackFunck) {
+    for (let i = 0; i < this.length; i++) {
+      callBackFunck(this[i],i,this);
+    }
+}
+}
+function Sum(value,index,array) {
+  console.log(array);
 }
 MyArray.prototype = new MyArrayProto();
 
 const myArr1 = new MyArray();
 
-const arr = [];
+const arr = [1,2,3];
+myArr1.push(1);
+myArr1.push(2);
+myArr1.push(3);
+myArr1.push(4);
+myArr1.push(5);
+myArr1.forEach(Sum);
+
+// function (value,index,arr) {
+//   for(let i = 0;i < this.length;i++) {
+//     value =this[i];
+//     index =i;
+//     arr = this;
+//     console.log(i)
+//   }
+// }
