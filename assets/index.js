@@ -56,6 +56,13 @@ function MyArrayProto() {
     }
     return newArray;
   };
+  this.filter = function (callBackFunck) {
+    let res = [];
+    for (let i = 0; i < this.length; i++) {
+      res.push(this[i]) = callBackFunck(this[i], i, this);
+    }
+    return res;
+  };
 }
 
 MyArray.prototype = new MyArrayProto();
@@ -70,5 +77,8 @@ myArr1.push(4);
 myArr1.push(5);
 function callBackFunck(value) {
   return value * 2;
+}
+function filterTest (value) {
+  return value > 5;
 }
 const newArr = myArr1.map(callBackFunck);
