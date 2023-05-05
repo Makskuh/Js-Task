@@ -82,3 +82,10 @@ function filterTest (value) {
   return value > 5;
 }
 const newArr = myArr1.map(callBackFunck);
+function multiplyFunc(...numberArr) {
+  let res = 1;
+  for(let number of numberArr) {
+    res *= number; 
+  }
+  return  res;
+}
