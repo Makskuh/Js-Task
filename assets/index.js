@@ -1,36 +1,32 @@
 'use strict';
-function MyArray() {
-  this.length = 0;
-}
-
-function MyArrayProto() {
-  this.push = function (newElem) {
-    // записати елемент
-    this[this.length] = newElem;
-    // оновили довжину масиву
-    this.length++;
+class MyArray {
+  constructor() {
+    this.length = 0;
+  }
+  push(...newElem) {
+    for (let number of newElem) {
+      this[this.length] = number;
+      this.length++;
+    }
     return this.length;
-  };
-
-  this.pop = function () {
+  }
+  pop() {
     if (this.length > 0) {
       const lastItem = this[this.length - 1];
       delete this[--this.length];
-
       return lastItem;
     }
-
     return undefined;
-  };
-  this.unshift = function (newElem) {
+  }
+  unshift(newElem) {
     for (let i = this.length; i > 0; i--) {
       this[i] = this[i - 1];
     }
     this.length++;
     this[0] = newElem;
     return this.length;
-  };
-  this.shift = function () {
+  }
+  shift() {
     if (this.length > 0) {
       const firstItem = this[0];
       for (let i = 0; i < this.length; i++) {
@@ -40,35 +36,45 @@ function MyArrayProto() {
       return firstItem;
     }
     return undefined;
-  };
-  this.isMyArray = function (object) {
+  }
+  isMyArray(object) {
     return object instanceof MyArray;
-  };
-  this.forEach = function (callBackFunck) {
+  }
+  forEach(callBackFunck) {
     for (let i = 0; i < this.length; i++) {
       callBackFunck(this[i], i, this);
     }
-  };
-  this.map = function (callBackFunck) {
+  }
+  map(callBackFunck) {
     let newArray = [];
     for (let i = 0; i < this.length; i++) {
       newArray[i] = callBackFunck(this[i], i, this);
     }
     return newArray;
-  };
-  this.filter = function (callBackFunck) {
+  }
+  filter(callBack) {
     let res = [];
     for (let i = 0; i < this.length; i++) {
-      res.push(this[i]) = callBackFunck(this[i], i, this);
+      if (callBack(this[i], i, this)) {
+        res.push(this[i]);
+      }
     }
     return res;
-  };
+  }
+  [Symbol.iterator]() {
+    let i = 0;
+    const context = this;
+    return {
+      next: function () {
+        return {
+          done: i >= context.length,
+          value: context[i++],
+        };
+      },
+    };
+  }
 }
-
-MyArray.prototype = new MyArrayProto();
-
 const myArr1 = new MyArray();
-
 const arr = [1, 2, 3];
 myArr1.push(1);
 myArr1.push(2);
@@ -78,14 +84,7 @@ myArr1.push(5);
 function callBackFunck(value) {
   return value * 2;
 }
-function filterTest (value) {
-  return value > 5;
+function filterTest(value) {
+  return value === 6;
 }
-const newArr = myArr1.map(callBackFunck);
-function multiplyFunc(...numberArr) {
-  let res = 1;
-  for(let number of numberArr) {
-    res *= number; 
-  }
-  return  res;
-}
+const newArr = myArr1.filter(filterTest);
