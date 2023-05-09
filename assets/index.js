@@ -14,7 +14,7 @@ const client = {
   isMale: true,
   numbCard: 1234567890,
   score: '12,25 usdt',
-  lvlCard: 'basic',
+  lvlCard: 'diamond',
 };
 const bank = {
   name: 'Mono',
@@ -45,16 +45,27 @@ const bank = {
         credit: 10000,
       },
     ],
+    ['empty', { discount: 0, caschBack: 0, credit: 0 }],
   ]),
 };
-const fullInfo = (client) =>
-  `${client.name} ${client.lastName} has id:${client.id} , card number ${
+const fullInfo = (client) => {
+  if (bank.CardLvl.get(client.lvlCard)) {
+    return `${client.name} ${client.lastName} has id:${
+      client.id
+    } , card number ${client.numbCard} and still has  discount: ${
+      bank.CardLvl.get(client.lvlCard).discount
+    } % , cashBack: ${
+      bank.CardLvl.get(client.lvlCard).caschBack
+    } %, credit limit: ${bank.CardLvl.get(client.lvlCard).credit} usdt`;
+  }
+  return `${client.name} ${client.lastName} has id:${client.id} , card number ${
     client.numbCard
   } and still has  discount: ${
-    bank.CardLvl.get(client.lvlCard).discount
-  } % , cashBack: ${
-    bank.CardLvl.get(client.lvlCard).caschBack
-  } %, credit limit: ${bank.CardLvl.get(client.lvlCard).credit} usdt`;
+    bank.CardLvl.get('empty').discount
+  } % ,cashBack: ${bank.CardLvl.get('empty').caschBack} %, credit limit: ${
+    bank.CardLvl.get('empty').credit
+  } usdt`;
+};
 
 // 3.0 завдання
 const array20 = [0, 0, 0];
