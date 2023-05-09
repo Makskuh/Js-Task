@@ -69,21 +69,32 @@ for (let i = 0; i < 10; i++) {
 //3.4
 // console.log(array20.filter((value) => value === 0).length)
 
-
 //4 Завдання
 class Book {
-  constructor(author,name,yearOfPubl,publication) {
+  constructor(author, name, yearOfPubl, publication) {
     this.author = author;
     this.name = name;
     this.yearOfPubl = yearOfPubl;
-    this.publication = publication
+    this.publication = publication;
   }
 }
 class EBook extends Book {
-  constructor(author,name,yearOfPubl,publication,format,eNumb) {
-    super(author,name,yearOfPubl,publication)
+  constructor(author, name, yearOfPubl, publication, format, eNumb) {
+    super(author, name, yearOfPubl, publication);
     this.format = format;
     this.eNumb = eNumb;
   }
 }
-//5 Завдання 
+//5 Завдання
+function Nnumber(n) {
+  for (let i = 1; i <= n; i++) {
+    if (i % 3 === 0 && i % 5 === 0) {
+      console.log('fizzbuzz');
+    } else if (i % 3 === 0) {
+      console.log('fizz');
+    } else if (i % 5 === 0) {
+      console.log('bizz');
+    } else console.log(i);
+  }
+  return 'calc fizzbuzz';
+}
