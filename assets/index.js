@@ -88,3 +88,5 @@ function filterTest(value) {
   return value === 6;
 }
 const newArr = myArr1.filter(filterTest);
+
+
